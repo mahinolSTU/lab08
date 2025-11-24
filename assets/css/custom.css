@@ -440,3 +440,109 @@ service section -----------------
   }
 }
 
+.animated-gradient {
+  background: linear-gradient(135deg, #1e1e2f, #2b2b45 40%, #3f4c77);
+  background-size: 200% 200%;
+  animation: smoothGradient 12s ease infinite;
+}
+
+@keyframes smoothGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+/* ------------------------------------------------------------
+   DECORATIVE SHAPES (CIRCLES + TRIANGLES) WITH ANIMATION
+------------------------------------------------------------ */
+
+/* Make sure hero can hold absolutely-positioned shapes */
+.hero.section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Wrapper for background shapes */
+.background-elements {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1; /* keeps shapes behind content */
+}
+
+/* ===== Circles ===== */
+
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.25;
+  filter: blur(1px);
+  background: radial-gradient(circle at 30% 30%, #ffffff40, #377dff);
+  animation: floatShape 14s ease-in-out infinite;
+}
+
+/* smaller circle on top-left */
+.bg-circle.circle-1 {
+  width: 180px;
+  height: 180px;
+  top: 8%;
+  left: -60px;
+}
+
+/* larger circle on bottom-right */
+.bg-circle.circle-2 {
+  width: 260px;
+  height: 260px;
+  bottom: -80px;
+  right: -80px;
+  animation-duration: 18s;
+  animation-direction: alternate-reverse;
+}
+
+/* ===== Triangles ===== */
+
+.decor-triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0.26;
+  border-left: 45px solid transparent;
+  border-right: 45px solid transparent;
+  border-bottom: 80px solid #8f94fb;
+  animation: spinSlow 20s linear infinite;
+}
+
+/* top-right triangle */
+.decor-triangle.triangle-1 {
+  top: 12%;
+  right: 15%;
+}
+
+/* bottom-left triangle */
+.decor-triangle.triangle-2 {
+  bottom: 10%;
+  left: 20%;
+  animation-duration: 24s;
+  animation-direction: reverse;
+}
+
+/* ===== Keyframes ===== */
+
+@keyframes floatShape {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
