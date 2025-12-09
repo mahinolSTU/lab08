@@ -547,9 +547,9 @@ service section -----------------
   }
 }
 
-/* ------------------------------
-   Contact form JS task styling
-   ------------------------------ */
+/* ------------------------------------------------------------
+   Contact form — JS tasks (required + optional)
+   ------------------------------------------------------------ */
 
 .contact-form label.form-label {
   font-size: 0.9rem;
@@ -564,6 +564,25 @@ service section -----------------
 
 .rating-input {
   text-align: center;
+}
+
+/* Validation feedback */
+.contact-form .invalid-feedback {
+  display: none;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.contact-form .form-control.is-invalid ~ .invalid-feedback {
+  display: block;
+}
+
+.contact-form .form-control.is-invalid {
+  border-color: #dc3545;
+}
+
+.contact-form .form-control.is-valid {
+  border-color: #198754;
 }
 
 /* Output block under the form */
@@ -584,20 +603,20 @@ service section -----------------
   font-weight: 600;
 }
 
-/* 6) Color-coded average value */
+/* Average color coding */
 .average-value.avg-low {
-  color: #ff4d4f;   /* red */
+  color: #ff4d4f;   /* 0–4 - red */
 }
 
 .average-value.avg-mid {
-  color: #ff9800;   /* orange */
+  color: #ff9800;   /* 4–7 - orange */
 }
 
 .average-value.avg-high {
-  color: #4caf50;   /* green */
+  color: #4caf50;   /* 7–10 - green */
 }
 
-/* 7) Success popup */
+/* Success popup */
 .success-popup {
   position: fixed;
   right: 1.5rem;
@@ -621,4 +640,186 @@ service section -----------------
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+
+
+/* =========================
+   Memory Game Section
+   ========================= */
+
+.memory-game {
+  padding: 3rem 0;
+}
+
+.memory-game .section-title {
+  margin-bottom: 0.5rem;
+}
+
+.memory-game .section-subtitle {
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+/* Controls */
+.memory-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.memory-difficulty label {
+  margin-right: 0.5rem;
+  font-weight: 500;
+}
+
+.memory-difficulty select {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid #d1d5db;
+}
+
+.memory-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Layout: board + stats */
+.memory-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.memory-game-board {
+  flex: 2 1 260px;
+}
+
+.memory-stats-panel {
+  flex: 1 1 200px;
+  min-width: 200px;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.memory-stats-title {
+  margin-bottom: 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.memory-stats-panel p {
+  margin-bottom: 0.25rem;
+}
+
+.memory-win-message {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .memory-layout {
+    flex-direction: column;
+  }
+}
+
+/* =========================
+   Memory Game Cards
+   ========================= */
+
+.memory-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+/* Easy = 4 x 3 grid */
+.memory-grid--easy {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* Hard = 6 x 4 grid */
+.memory-grid--hard {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.memory-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.memory-card:focus-visible {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+}
+
+.memory-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+}
+
+.memory-card.flipped .memory-card-inner,
+.memory-card.matched .memory-card-inner {
+  transform: rotateY(180deg);
+}
+
+.memory-card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  backface-visibility: hidden;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+  font-size: 2rem;
+  user-select: none;
+}
+
+/* Front (hidden side) */
+.memory-card-front {
+  background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #6b7280;
+}
+
+/* Back (shown when flipped) */
+.memory-card-back {
+  background: linear-gradient(135deg, #0d6efd, #3b82f6);
+  color: #ffffff;
+  transform: rotateY(180deg);
+}
+
+/* Matched style */
+.memory-card.matched .memory-card-back {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.memory-card.matched {
+  cursor: default;
+  opacity: 0.95;
+}
+
+/* Small screens: slightly smaller content for hard mode */
+@media (max-width: 576px) {
+  .memory-grid--hard .memory-card-face {
+    font-size: 1.5rem;
+  }
 }
